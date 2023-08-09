@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,6 +7,7 @@ import 'package:lift_app/data/request/request.dart';
 import 'package:lift_app/domain/model/models.dart';
 import 'package:lift_app/presentations/home/drawer/drawer_view_model.dart';
 import 'package:lift_app/presentations/home/messages/messages_view_model.dart';
+import 'package:lift_app/presentations/splash/splash_screen.dart';
 import 'package:lift_app/presentations/utils/utils.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -523,6 +524,9 @@ class _MessageScreenState extends State<MessageScreen> {
                                                     isError = false;
                                                     errorMessage = EMPTY;
                                                   });
+                                                  log('room id ${widget.chatObjectModel.roomId}');
+                                                  log('user 0 ${widget.chatObjectModel.usersList[0]}');
+                                                  log('user 1 ${widget.chatObjectModel.usersList[1]}');
 
                                                   await viewModel.sendMessage(
                                                       SendMessageRequest(
@@ -531,58 +535,58 @@ class _MessageScreenState extends State<MessageScreen> {
                                                           _messageEditingController
                                                               .text));
                                                   //Notification part
-                                                  NotificationsService
-                                                      .sendPushNotification(
-                                                          SendNotificationRequest(
-                                                    [
-                                                      widget.chatObjectModel
-                                                                      .usersList[
-                                                                  0] ==
-                                                              CommonData
-                                                                  .passengerDataModal
-                                                                  .id
-                                                          ? widget
-                                                              .chatObjectModel
-                                                              .usersList[1]
-                                                          : widget
-                                                              .chatObjectModel
-                                                              .usersList[0]
-                                                    ],
-                                                    CommonData
-                                                        .passengerDataModal
-                                                        .name,
-                                                    _messageEditingController
-                                                        .text,
-                                                    <String, dynamic>{
-                                                      'type': 'Message',
-                                                      'model': widget
-                                                          .chatObjectModel
-                                                          .toJson(),
-                                                      'title': CommonData
-                                                          .passengerDataModal
-                                                          .name,
-                                                      'body':
+                                                  NotificationsService.sendPushNotification(
+                                                      SendNotificationRequest(
+                                                          [
+                                                            widget.chatObjectModel
+                                                                            .usersList[
+                                                                        0] ==
+                                                                    CommonData
+                                                                        .passengerDataModal
+                                                                        .id
+                                                                ? widget.chatObjectModel
+                                                                        .usersList[
+                                                                    1]
+                                                                : widget
+                                                                    .chatObjectModel
+                                                                    .usersList[0]
+                                                          ],
+                                                          CommonData
+                                                              .passengerDataModal
+                                                              .name,
                                                           _messageEditingController
                                                               .text,
-                                                      'userImage': CommonData
-                                                          .passengerDataModal
-                                                          .profileImg,
-                                                      'userId': [
-                                                        widget.chatObjectModel
-                                                                        .usersList[
-                                                                    0] ==
-                                                                CommonData
-                                                                    .passengerDataModal
-                                                                    .id
-                                                            ? widget
+                                                          <String, dynamic>{
+                                                            'type': 'Message',
+                                                            'model': widget
                                                                 .chatObjectModel
-                                                                .usersList[1]
-                                                            : widget
-                                                                .chatObjectModel
-                                                                .usersList[0]
-                                                      ],
-                                                    },
-                                                  ));
+                                                                .toJson(),
+                                                            'title': CommonData
+                                                                .passengerDataModal
+                                                                .name,
+                                                            'body':
+                                                                _messageEditingController
+                                                                    .text,
+                                                            'userImage': CommonData
+                                                                .passengerDataModal
+                                                                .profileImg,
+                                                            'userId': [
+                                                              widget.chatObjectModel
+                                                                              .usersList[
+                                                                          0] ==
+                                                                      CommonData
+                                                                          .passengerDataModal
+                                                                          .id
+                                                                  ? widget.chatObjectModel
+                                                                          .usersList[
+                                                                      1]
+                                                                  : widget
+                                                                      .chatObjectModel
+                                                                      .usersList[0]
+                                                            ],
+                                                          },
+                                                          globalAppPreferences
+                                                              .getFCMToken()));
                                                   setState(() {
                                                     isSendingMessage = false;
                                                     isError = false;

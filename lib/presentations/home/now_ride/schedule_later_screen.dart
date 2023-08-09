@@ -7,6 +7,7 @@ import 'package:lift_app/data/request/request.dart';
 import 'package:lift_app/domain/model/models.dart';
 import 'package:lift_app/presentations/home/drawer/drawer_view_model.dart';
 import 'package:lift_app/presentations/home/now_ride/now_ride_view_model.dart';
+import 'package:lift_app/presentations/splash/splash_screen.dart';
 
 import '../../resources/routes_manager.dart';
 import '../../utils/notifications_service.dart';
@@ -267,24 +268,28 @@ class _ScheduleLaterRideScreenState extends State<ScheduleLaterRideScreen> {
                                               NotificationsService
                                                   .sendPushNotification(
                                                       SendNotificationRequest(
-                                                widget
-                                                    .nowRideViewModel.usersList,
-                                                'Notification',
-                                                '${CommonData.passengerDataModal.name} has started ride.',
-                                                <String, dynamic>{
-                                                  'type': 'Start_ride',
-                                                  'route': '1',
-                                                  'title': 'Notification',
-                                                  'body':
-                                                      '${CommonData.passengerDataModal.name} has started ride.',
-                                                  'userImage': CommonData
-                                                      .passengerDataModal
-                                                      .profileImg,
-                                                  'userId': widget
-                                                      .nowRideViewModel
-                                                      .usersList
-                                                },
-                                              ));
+                                                          widget
+                                                              .nowRideViewModel
+                                                              .usersList,
+                                                          'Notification',
+                                                          '${CommonData.passengerDataModal.name} has started ride.',
+                                                          <String, dynamic>{
+                                                            'type':
+                                                                'Start_ride',
+                                                            'route': '1',
+                                                            'title':
+                                                                'Notification',
+                                                            'body':
+                                                                '${CommonData.passengerDataModal.name} has started ride.',
+                                                            'userImage': CommonData
+                                                                .passengerDataModal
+                                                                .profileImg,
+                                                            'userId': widget
+                                                                .nowRideViewModel
+                                                                .usersList
+                                                          },
+                                                          globalAppPreferences
+                                                              .getFCMToken()));
 
                                               if (context.mounted) {
                                                 Navigator

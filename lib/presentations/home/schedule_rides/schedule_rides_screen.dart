@@ -8,6 +8,7 @@ import 'package:lift_app/presentations/home/schedule_rides/components/update_req
 import 'package:lift_app/presentations/home/schedule_rides/schedule_rides_view_model.dart';
 import 'package:lift_app/presentations/resources/assets_manager.dart';
 import 'package:lift_app/presentations/resources/routes_manager.dart';
+import 'package:lift_app/presentations/splash/splash_screen.dart';
 import 'package:lift_app/presentations/utils/notifications_service.dart';
 import 'package:lift_app/presentations/utils/widgets.dart';
 import 'package:lottie/lottie.dart';
@@ -899,31 +900,26 @@ class _ScheduleScreenState extends State<ScheduleRidesScreen> {
 
                                                                   //notificaiton part
 
-                                                                  NotificationsService
-                                                                      .sendPushNotification(
-                                                                          SendNotificationRequest(
-                                                                    UpdatePassengerRequestViewModel
-                                                                        .userList,
-                                                                    'Notification',
-                                                                    '${CommonData.passengerDataModal.name} has started ride.',
-                                                                    <String,
-                                                                        dynamic>{
-                                                                      'type':
-                                                                          'Start_ride',
-                                                                      'route':
-                                                                          '1',
-                                                                      'title':
-                                                                          'Notification',
-                                                                      'body':
-                                                                          '${CommonData.passengerDataModal.name} has started ride.',
-                                                                      'userImage': CommonData
-                                                                          .passengerDataModal
-                                                                          .profileImg,
-                                                                      'userId':
-                                                                          UpdatePassengerRequestViewModel
-                                                                              .userList
-                                                                    },
-                                                                  ));
+                                                                  NotificationsService.sendPushNotification(SendNotificationRequest(
+                                                                      UpdatePassengerRequestViewModel.userList,
+                                                                      'Notification',
+                                                                      '${CommonData.passengerDataModal.name} has started ride.',
+                                                                      <String, dynamic>{
+                                                                        'type':
+                                                                            'Start_ride',
+                                                                        'route':
+                                                                            '1',
+                                                                        'title':
+                                                                            'Notification',
+                                                                        'body':
+                                                                            '${CommonData.passengerDataModal.name} has started ride.',
+                                                                        'userImage': CommonData
+                                                                            .passengerDataModal
+                                                                            .profileImg,
+                                                                        'userId':
+                                                                            UpdatePassengerRequestViewModel.userList
+                                                                      },
+                                                                      globalAppPreferences.getFCMToken()));
                                                                   if (context
                                                                       .mounted) {
                                                                     Navigator.of(context).pushNamed(

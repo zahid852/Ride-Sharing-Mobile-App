@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -201,12 +203,37 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     } else {
                       List<dynamic> notificationModelList =
                           snapshot.data as List<dynamic>;
+                      List<NotificationModel> tempNotifications = [];
+                      for (var element in notificationModelList) {
+                        tempNotifications.add(element as NotificationModel);
+                      }
+
+                      List<NotificationModel> notificationsList = [];
+                      for (var element in tempNotifications) {
+                        if (notificationsList.isEmpty) {
+                          notificationsList.add(element);
+                        } else {
+                          bool dataExist = false;
+                          for (int i = 0; i < notificationsList.length; i++) {
+                            if (notificationsList[i].dateTime ==
+                                    element.dateTime &&
+                                notificationsList[i].body == element.body) {
+                              dataExist = true;
+                            }
+                          }
+                          if (!dataExist) {
+                            notificationsList.add(element);
+                          }
+                        }
+                      }
+
                       return ListView.builder(
-                          itemCount: notificationModelList.length,
+                          itemCount: notificationsList.length,
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           itemBuilder: (ctx, index) {
                             NotificationModel notification =
-                                notificationModelList[index];
+                                notificationsList[index];
+
                             return Column(
                               children: [
                                 ListTile(

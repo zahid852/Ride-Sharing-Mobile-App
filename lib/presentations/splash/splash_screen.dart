@@ -9,6 +9,8 @@ import 'package:lift_app/presentations/resources/routes_manager.dart';
 import 'package:lift_app/presentations/utils/utils.dart';
 import 'package:provider/provider.dart';
 
+final AppPreferences globalAppPreferences = instance<AppPreferences>();
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 

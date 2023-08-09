@@ -106,6 +106,7 @@ SendNotificationRequest _$SendNotificationRequestFromJson(
       json['title'] as String?,
       json['content'] as String?,
       json['data'] as Map<String, dynamic>?,
+      json['token'] as String?,
     );
 
 Map<String, dynamic> _$SendNotificationRequestToJson(
@@ -115,4 +116,5 @@ Map<String, dynamic> _$SendNotificationRequestToJson(
       'title': instance.title,
       'content': instance.content,
       'data': instance.data,
+      'token': instance.token,
     };

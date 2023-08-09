@@ -112,7 +112,6 @@ class _SharedRideDetailScreenState extends State<SharedRideDetailScreen> {
                                   imageBuilder: (context, imageProvider) =>
                                       Container(
                                     decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
                                       image: DecorationImage(
                                           image: imageProvider,
                                           fit: BoxFit.cover),
