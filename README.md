@@ -33,7 +33,7 @@ TripShare is a real-time ride sharing application. TripShare provides a way to c
 - After the driver accepting passenger's request, Passenger can message & embedded call to driver
 - Push notification will be sent to driver when passenger send request to driver's campaign and for messages as well
 - Navigating option to Google Map for tracking
-- Driver can submit review (rating + feedback) at the end of the ride
+- Passenger can submit review (rating + feedback) at the end of the ride
 - Passenger can view his ride history
 - Passenger can view his Notifications history 
 
