@@ -15,6 +15,7 @@ const String PREFS_KEY_IS_DRIVER_PROFILE_DONE =
 const String PREFS_KEY_TOKEN = "PREFS_KEY_TOKEN";
 const String PREFS_KEY_USER_ID = "PREFS_KEY_USER_ID";
 const String THEME_STATUS = "THEME_STATUS";
+const String FCM_TOKEN = "FCM_TOKEN";
 
 class AppPreferences {
   final SharedPreferences _sharedPreferences;
@@ -78,6 +79,14 @@ class AppPreferences {
           THEME_STATUS,
         ) ??
         false;
+  }
+
+  void setFCMToken(String fcmToken) {
+    _sharedPreferences.setString(FCM_TOKEN, fcmToken);
+  }
+
+  String getFCMToken() {
+    return _sharedPreferences.getString(FCM_TOKEN) ?? EMPTY;
   }
 
   Future<void> logout() async {

@@ -266,8 +266,11 @@ class SendNotificationRequest {
   String? content;
   @JsonKey(name: "data")
   Map<String, dynamic>? data;
+  @JsonKey(name: "token")
+  String? token;
 
-  SendNotificationRequest(this.receiverId, this.title, this.content, this.data);
+  SendNotificationRequest(
+      this.receiverId, this.title, this.content, this.data, this.token);
 
   //from json
   factory SendNotificationRequest.fromJson(Map<String, dynamic> json) =>

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer' as print;
 import 'dart:io';
 import 'dart:math';
+import 'package:lift_app/presentations/splash/splash_screen.dart';
 import 'package:timezone/data/latest.dart' as tzl;
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/widgets.dart';
@@ -82,6 +83,7 @@ class NotificationsService {
 
   Future<void> getDeviceToken() async {
     PushNotificationCredentials.token = await messaging.getToken() ?? EMPTY;
+    globalAppPreferences.setFCMToken(PushNotificationCredentials.token);
     print.log('token ${PushNotificationCredentials.token}');
   }
 
@@ -120,18 +122,15 @@ class NotificationsService {
 
       Map<String, dynamic> data =
           jsonDecode(message.data['data']) as Map<String, dynamic>;
-      List<dynamic> usersList = data['userId'] as List<dynamic>;
 
-      if (usersList.contains(CommonData.passengerDataModal.id)) {
-        localDataSource.insert(
-            LocalDataSourceConstants.notificationTable,
-            NotificationModel(
-                CommonData.passengerDataModal.id,
-                data['title'],
-                data['body'],
-                data['userImage'],
-                '${formatDateToMonthDay(DateTime.now())} at ${formatTimeToTimeString(DateTime.now())}'));
-      }
+      localDataSource.insert(
+          LocalDataSourceConstants.notificationTable,
+          NotificationModel(
+              CommonData.passengerDataModal.id,
+              data['title'],
+              data['body'],
+              data['userImage'],
+              '${formatDateToMonthDay(DateTime.now())} at ${formatTimeToTimeString(DateTime.now())}'));
 
       if (Platform.isAndroid) {
         initLocalNotifications(context, message);

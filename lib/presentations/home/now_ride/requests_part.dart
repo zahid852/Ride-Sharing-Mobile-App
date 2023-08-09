@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lift_app/data/request/request.dart';
 import 'package:lift_app/domain/model/models.dart';
 import 'package:lift_app/presentations/home/drawer/drawer_view_model.dart';
+import 'package:lift_app/presentations/splash/splash_screen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
@@ -444,21 +445,26 @@ Widget nowRideRequests(BuildContext context, NowRideViewModel nowRideViewModel,
                                             NotificationsService
                                                 .sendPushNotification(
                                                     SendNotificationRequest(
-                                              [data.passengerId],
-                                              'Notification',
-                                              '${CommonData.passengerDataModal.name} has rejected your request.',
-                                              <String, dynamic>{
-                                                'type': 'Rejected_request',
-                                                'route': '2',
-                                                'title': 'Notification',
-                                                'body':
-                                                    '${CommonData.passengerDataModal.name} has rejected your request.',
-                                                'userImage': CommonData
-                                                    .passengerDataModal
-                                                    .profileImg,
-                                                'userId': [data.passengerId]
-                                              },
-                                            ));
+                                                        [data.passengerId],
+                                                        'Notification',
+                                                        '${CommonData.passengerDataModal.name} has rejected your request.',
+                                                        <String, dynamic>{
+                                                          'type':
+                                                              'Rejected_request',
+                                                          'route': '2',
+                                                          'title':
+                                                              'Notification',
+                                                          'body':
+                                                              '${CommonData.passengerDataModal.name} has rejected your request.',
+                                                          'userImage': CommonData
+                                                              .passengerDataModal
+                                                              .profileImg,
+                                                          'userId': [
+                                                            data.passengerId
+                                                          ]
+                                                        },
+                                                        globalAppPreferences
+                                                            .getFCMToken()));
 
                                             nowRideViewModel.getUpdatedData(
                                                 nowRideViewModel.requestsList);
@@ -526,21 +532,26 @@ Widget nowRideRequests(BuildContext context, NowRideViewModel nowRideViewModel,
                                             NotificationsService
                                                 .sendPushNotification(
                                                     SendNotificationRequest(
-                                              [data.passengerId],
-                                              'Notification',
-                                              '${CommonData.passengerDataModal.name} has accepted your request.',
-                                              <String, dynamic>{
-                                                'type': 'Accept_request',
-                                                'route': '1',
-                                                'title': 'Notification',
-                                                'body':
-                                                    '${CommonData.passengerDataModal.name} has accepted your request.',
-                                                'userImage': CommonData
-                                                    .passengerDataModal
-                                                    .profileImg,
-                                                'userId': [data.passengerId]
-                                              },
-                                            ));
+                                                        [data.passengerId],
+                                                        'Notification',
+                                                        '${CommonData.passengerDataModal.name} has accepted your request.',
+                                                        <String, dynamic>{
+                                                          'type':
+                                                              'Accept_request',
+                                                          'route': '1',
+                                                          'title':
+                                                              'Notification',
+                                                          'body':
+                                                              '${CommonData.passengerDataModal.name} has accepted your request.',
+                                                          'userImage': CommonData
+                                                              .passengerDataModal
+                                                              .profileImg,
+                                                          'userId': [
+                                                            data.passengerId
+                                                          ]
+                                                        },
+                                                        globalAppPreferences
+                                                            .getFCMToken()));
 
                                             if (context.mounted) {
                                               Navigator.of(context).pop();

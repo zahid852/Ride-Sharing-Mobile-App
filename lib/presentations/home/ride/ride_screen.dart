@@ -16,6 +16,7 @@ import 'package:lift_app/presentations/home/drawer/drawer_view_model.dart';
 import 'package:lift_app/presentations/home/ride/ride_view_model.dart';
 import 'package:lift_app/presentations/resources/routes_manager.dart'
     as navigationRoutes;
+import 'package:lift_app/presentations/splash/splash_screen.dart';
 
 import 'package:lottie/lottie.dart' as lottie;
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -1208,24 +1209,28 @@ class _RideScreenState extends State<RideScreen> {
 //notification part
                                     NotificationsService.sendPushNotification(
                                         SendNotificationRequest(
-                                      _rideViewModel.usersList,
-                                      'Notification',
-                                      '${CommonData.passengerDataModal.name} has ended ride.',
-                                      <String, dynamic>{
-                                        'type': 'End_ride',
-                                        'campaignId': widget
-                                            .scheduleRideDataModal.campaignId,
-                                        'driverId': widget
-                                            .scheduleRideDataModal.driverId,
-                                        'route': '1',
-                                        'title': 'Notification',
-                                        'body':
+                                            _rideViewModel.usersList,
+                                            'Notification',
                                             '${CommonData.passengerDataModal.name} has ended ride.',
-                                        'userImage': CommonData
-                                            .passengerDataModal.profileImg,
-                                        'userId': _rideViewModel.usersList
-                                      },
-                                    ));
+                                            <String, dynamic>{
+                                              'type': 'End_ride',
+                                              'campaignId': widget
+                                                  .scheduleRideDataModal
+                                                  .campaignId,
+                                              'driverId': widget
+                                                  .scheduleRideDataModal
+                                                  .driverId,
+                                              'route': '1',
+                                              'title': 'Notification',
+                                              'body':
+                                                  '${CommonData.passengerDataModal.name} has ended ride.',
+                                              'userImage': CommonData
+                                                  .passengerDataModal
+                                                  .profileImg,
+                                              'userId': _rideViewModel.usersList
+                                            },
+                                            globalAppPreferences
+                                                .getFCMToken()));
                                     if (context.mounted) {
                                       Navigator.of(context)
                                           .pushReplacementNamed(navigationRoutes

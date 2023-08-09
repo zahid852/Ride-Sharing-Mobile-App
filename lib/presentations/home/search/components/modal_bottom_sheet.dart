@@ -4,6 +4,7 @@ import 'package:lift_app/data/request/request.dart';
 import 'package:lift_app/presentations/home/drawer/drawer_view_model.dart';
 import 'package:lift_app/presentations/home/search/components/modal_bottom_sheet_view_model.dart';
 import 'package:lift_app/presentations/resources/routes_manager.dart';
+import 'package:lift_app/presentations/splash/splash_screen.dart';
 import 'package:lift_app/presentations/utils/notifications_service.dart';
 import 'package:lift_app/presentations/utils/socket.dart';
 import 'package:lift_app/presentations/utils/utils.dart';
@@ -653,20 +654,20 @@ void showModalBottomSheetForSendingRequest(
                               if (isNowRide == false) {
                                 NotificationsService.sendPushNotification(
                                     SendNotificationRequest(
-                                  [driverId],
-                                  'Notification',
-                                  '${CommonData.passengerDataModal.name} has send you a request.',
-                                  <String, dynamic>{
-                                    'type': 'Send_request',
-                                    'campaignId': campaignId,
-                                    'title': 'Notification',
-                                    'body':
+                                        [driverId],
+                                        'Notification',
                                         '${CommonData.passengerDataModal.name} has send you a request.',
-                                    'userImage': CommonData
-                                        .passengerDataModal.profileImg,
-                                    'userId': [driverId]
-                                  },
-                                ));
+                                        <String, dynamic>{
+                                          'type': 'Send_request',
+                                          'campaignId': campaignId,
+                                          'title': 'Notification',
+                                          'body':
+                                              '${CommonData.passengerDataModal.name} has send you a request.',
+                                          'userImage': CommonData
+                                              .passengerDataModal.profileImg,
+                                          'userId': [driverId],
+                                        },
+                                        globalAppPreferences.getFCMToken()));
                               }
 
                               if (context.mounted) {
