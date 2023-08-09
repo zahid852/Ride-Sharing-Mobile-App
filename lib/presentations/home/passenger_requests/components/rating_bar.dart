@@ -12,6 +12,7 @@ import 'package:lottie/lottie.dart';
 
 import '../../../../data/network/failure.dart';
 import '../../../resources/assets_manager.dart';
+import '../../../splash/splash_screen.dart';
 
 class PassengerRatingBar extends StatefulWidget {
   final String driverId;
@@ -202,20 +203,21 @@ class _PassengerRatingBarState extends State<PassengerRatingBar> {
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           10))),
-                                          onPressed:
-                                              passengerRating.toInt() == 0 ||
-                                                      _commentEditingController
-                                                          .text.isEmpty
-                                                  ? null
-                                                  : () async {
-                                                      setState(() {
-                                                        isLoading = true;
-                                                        isError = false;
-                                                        errorMessage = EMPTY;
-                                                        isSuccess = false;
-                                                      });
-                                                      try {
-                                                        await _ratingViewModel.submitRating(
+                                          onPressed: passengerRating.toInt() ==
+                                                      0 ||
+                                                  _commentEditingController
+                                                      .text.isEmpty
+                                              ? null
+                                              : () async {
+                                                  setState(() {
+                                                    isLoading = true;
+                                                    isError = false;
+                                                    errorMessage = EMPTY;
+                                                    isSuccess = false;
+                                                  });
+                                                  try {
+                                                    await _ratingViewModel
+                                                        .submitRating(
                                                             RatingSubmitRequest(
                                                                 widget.driverId,
                                                                 passengerRating
@@ -226,56 +228,56 @@ class _PassengerRatingBarState extends State<PassengerRatingBar> {
                                                                     .text,
                                                                 DateTime.now()
                                                                     .toString()));
-                                                        //notification part
-                                                        NotificationsService
-                                                            .sendPushNotification(
-                                                                SendNotificationRequest(
-                                                          [widget.driverId],
-                                                          'Notification',
-                                                          '${CommonData.passengerDataModal.name} has given you a rating of ${passengerRating.toInt()}.',
-                                                          <String, dynamic>{
-                                                            'type':
-                                                                'Submit_rating',
-                                                            'title':
-                                                                'Notification',
-                                                            'body':
-                                                                '${CommonData.passengerDataModal.name} has given you a rating of ${passengerRating.toInt()}.',
-                                                            'userImage': CommonData
-                                                                .passengerDataModal
-                                                                .profileImg,
-                                                            'userId': [
-                                                              widget.driverId
-                                                            ]
-                                                          },
-                                                        ));
+                                                    //notification part
+                                                    NotificationsService.sendPushNotification(
+                                                        SendNotificationRequest(
+                                                            [widget.driverId],
+                                                            'Notification',
+                                                            '${CommonData.passengerDataModal.name} has given you a rating of ${passengerRating.toInt()}.',
+                                                            <String, dynamic>{
+                                                              'type':
+                                                                  'Submit_rating',
+                                                              'title':
+                                                                  'Notification',
+                                                              'body':
+                                                                  '${CommonData.passengerDataModal.name} has given you a rating of ${passengerRating.toInt()}.',
+                                                              'userImage': CommonData
+                                                                  .passengerDataModal
+                                                                  .profileImg,
+                                                              'userId': [
+                                                                widget.driverId
+                                                              ]
+                                                            },
+                                                            globalAppPreferences
+                                                                .getFCMToken()));
 
-                                                        _commentEditingController
-                                                            .text = EMPTY;
+                                                    _commentEditingController
+                                                        .text = EMPTY;
 
-                                                        setState(() {
-                                                          isLoading = false;
-                                                          isError = false;
-                                                          errorMessage = EMPTY;
-                                                          isSuccess = true;
-                                                        });
-                                                      } on Failure catch (error) {
-                                                        setState(() {
-                                                          isLoading = false;
-                                                          isSuccess = false;
-                                                          isError = true;
-                                                          errorMessage =
-                                                              error.message;
-                                                        });
-                                                      } catch (error) {
-                                                        setState(() {
-                                                          isLoading = false;
-                                                          isError = true;
-                                                          isSuccess = false;
-                                                          errorMessage =
-                                                              'Something went wrong. Please try again later.';
-                                                        });
-                                                      }
-                                                    },
+                                                    setState(() {
+                                                      isLoading = false;
+                                                      isError = false;
+                                                      errorMessage = EMPTY;
+                                                      isSuccess = true;
+                                                    });
+                                                  } on Failure catch (error) {
+                                                    setState(() {
+                                                      isLoading = false;
+                                                      isSuccess = false;
+                                                      isError = true;
+                                                      errorMessage =
+                                                          error.message;
+                                                    });
+                                                  } catch (error) {
+                                                    setState(() {
+                                                      isLoading = false;
+                                                      isError = true;
+                                                      isSuccess = false;
+                                                      errorMessage =
+                                                          'Something went wrong. Please try again later.';
+                                                    });
+                                                  }
+                                                },
                                           child: Text(
                                             'Submit',
                                             style: GoogleFonts.nunito(

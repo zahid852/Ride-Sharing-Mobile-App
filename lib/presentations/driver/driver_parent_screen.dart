@@ -132,7 +132,7 @@ class _DriverScreenState extends State<DriverProfileScreen> {
           licenseInfoTable.expiryDate,
           licenseImage,
           ZERO,
-          5));
+          ZERO));
 
       _localDataSource.deleteRegisteringData();
       _appPreferences.setDriverProfileDone();

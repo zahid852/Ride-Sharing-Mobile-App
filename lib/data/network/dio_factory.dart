@@ -1,11 +1,9 @@
 import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:lift_app/app/app_preferences.dart';
 import 'package:lift_app/app/constants.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-
 import '../../app/di.dart';
 
 // ignore_for_file: constant_identifier_names

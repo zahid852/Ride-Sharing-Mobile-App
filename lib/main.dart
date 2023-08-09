@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -23,18 +22,15 @@ Future<void> _firbaseMessageHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   Map<String, dynamic> data =
       jsonDecode(message.data['data']) as Map<String, dynamic>;
-  List<dynamic> usersList = data['userId'] as List<dynamic>;
 
-  if (usersList.contains(appPreferences.getUserId())) {
-    localDataSource.insert(
-        LocalDataSourceConstants.notificationTable,
-        NotificationModel(
-            appPreferences.getUserId(),
-            data['title'],
-            data['body'],
-            data['userImage'],
-            '${formatDateToMonthDay(DateTime.now())} at ${formatTimeToTimeString(DateTime.now())}'));
-  }
+  localDataSource.insert(
+      LocalDataSourceConstants.notificationTable,
+      NotificationModel(
+          appPreferences.getUserId(),
+          data['title'],
+          data['body'],
+          data['userImage'],
+          '${formatDateToMonthDay(DateTime.now())} at ${formatTimeToTimeString(DateTime.now())}'));
 }
 
 Future<void> main() async {

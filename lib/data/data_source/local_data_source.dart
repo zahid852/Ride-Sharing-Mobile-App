@@ -136,7 +136,7 @@ class LocalDataSource {
 
   Future<void> insert(String tableName, dynamic dataModel) async {
     final db = await getDatabaseObject;
-
+    log('inserting');
     //here only id to be changed
     try {
       if (dataModel.runtimeType != NotificationModel) {
