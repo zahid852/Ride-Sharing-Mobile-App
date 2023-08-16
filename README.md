@@ -41,4 +41,5 @@ TripShare is a real-time ride sharing application. TripShare provides a way to c
 ## Demo
 
 
-[![TripShare Demo](https://www.linkedin.com/posts/zahidyousaf7_app-fluttercommunity-flutterdev-activity-7025519414288482304-saHO?utm_source=share&utm_medium=member_desktop)]
+[TripShare Demo](https://www.linkedin.com/posts/zahidyousaf7_app-fluttercommunity-flutterdev-activity-7025519414288482304-saHO?utm_source=share&utm_medium=member_desktop)
+[TripShare Demo](https://www.linkedin.com/posts/zahidyousaf7_app-fluttercommunity-flutterdev-activity-7025522984773681152-Q-Vg?utm_source=share&utm_medium=member_desktop)
